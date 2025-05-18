@@ -105,7 +105,7 @@ for gpus_per_proc, models, time_limit_per_experiment in gpu_mappings:
                 # f"--partition=p_datamining",
                 f"--time={time_limit.days}-{(time_limit.seconds // 3600):02}:{(time_limit.seconds % 3600) // 60:02}:{(time_limit.seconds % 60):02}",
                 "--nodelist=galadriel,dgx-h100-em2",
-                f"--job-name=[Yuxi: Verbalized Confidence]:{args.confidence_type}:[{','.join(models)}]",
+                f"--job-name=[Verbalized Confidence]:{args.confidence_type}:[{','.join(models)}]",
                 "./slurm_combined.sh",
             ]
             influence_command = [c for c in influence_command if c != ""]
