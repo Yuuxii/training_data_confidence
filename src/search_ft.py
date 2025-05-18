@@ -15,7 +15,7 @@ from huggingface_hub import login
 
 from huggingface_hub import HfApi
 
-login(token="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")
+login(token=" ")
 
 from load_data_prompt import dataname_list
 
@@ -25,7 +25,7 @@ def es_init() -> Elasticsearch:
     :param config: Path to the config yaml file, containing `cloud_id` and `api_key` fields.
     :return: Authenticated ElasticSearch client.
     """
-    ELASTIC_PASSWORD="43tEcVyvw3*kgudJekNf"
+    ELASTIC_PASSWORD=""
     es = Elasticsearch('https://localhost:9200', basic_auth=("elastic", ELASTIC_PASSWORD), verify_certs=False)
     requests.packages.urllib3.disable_warnings() 
 
@@ -244,6 +244,4 @@ if __name__ == "__main__":
         print(count_empty_returns)
         data = data.loc[:, ~data.columns.str.contains('^Unnamed')]
         data = Dataset.from_pandas(data)
-        data.save_to_disk("/srv/home/groups/dm/share/verb_confidence_exp/retrieved_documents/" + dataname + '_' + args.model + '_test')
-        # data.push_to_hub("/triviaqa-test-tulu3-query")
-        # data.to_csv(test_save_path, encoding ='utf-8', index=False)
+        data.save_to_disk(dataname + '_' + args.model + '_test')
