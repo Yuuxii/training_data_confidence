@@ -23,7 +23,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "True"
 parser = argparse.ArgumentParser("get_influence_confidence")
 parser.add_argument("confidence_type", help="Choose one of confidence_prompts (see below)")
 parser.add_argument("--model", help="A model on the hf hub. Format: username/name", default="allenai/OLMo-2-1124-7B-Instruct")
-parser.add_argument("--dataset", help="A dataset on the hf hub. Format: username/name", default="yuxixia/triviaqa-test-tulu3-query")
+parser.add_argument("--dataset", help="A dataset on the hf hub. Format: username/name", default="")
 parser.add_argument("--dataset_split", help="The split to access", default="train[0%:100%]")
 parser.add_argument("--checkpoint_nr", help="Id of the checkpoint to extract gradients for (inferred from the repo, starting at 0)",type=int, default=0)
 parser.add_argument("--output_path", help="The path where to store the result dataset at", default="./results_confidence")
