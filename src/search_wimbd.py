@@ -187,15 +187,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     es = es_init()
 
-    ### get similar documents to confidence prompt 
-    # wrap = get_documents_containing_phrases(
-    #                 index=args.index, 
-    #                 phrases=confi_prompt(), 
-    #                 num_documents=args.num_documents
-    #                 )
-    # confidence_prompt_pd = pd.DataFrame({"confidence_prompt": [confi_prompt()], "confidence_prompt_query":[[item for item in wrap]]})
-    # confidence_prompt_pd = confidence_prompt_pd.loc[:, ~confidence_prompt_pd.columns.str.contains('^Unnamed')]
-    # confidence_prompt_pd.to_csv('responses/confidence_prompt_query.csv', encoding ='utf-8')
     
     num_workers = 4  # Use available CPU cores
     
@@ -204,7 +195,7 @@ if __name__ == "__main__":
     else:
         categories = [ "qa", "pc"]
     
-    hf_path = "/srv/home/groups/dm/share/verb_confidence_exp/pre-training_data_exp/" + args.dataname + '_' + args.model + '_test'
+    hf_path = args.dataname + '_' + args.model + '_test'
     if os.path.isdir(hf_path):
         data = datasets.load_from_disk(hf_path)
         data = data.to_pandas()
@@ -260,40 +251,9 @@ if __name__ == "__main__":
             data.to_csv('retrived_docs/' + args.dataname + '_' + args.model + '_test.csv', encoding ='utf-8', index=False)
             try:
                 save_data = datasets.Dataset.from_pandas(data)
-                save_data.save_to_disk("/srv/home/groups/dm/share/verb_confidence_exp/pre-training_data_exp/" + args.dataname + '_' + args.model + '_test')
+                save_data.save_to_disk(args.dataname + '_' + args.model + '_test')
             except:
                 pass
-        # data.push_to_hub("/triviaqa-test-tulu3-query")
-        # data.to_csv(test_save_path, encoding ='utf-8', index=False)
+  
         
-        # else:
-        #     while "['']" in data[c+'_query'].tolist():
-        #         indexes = []
-        #         new_phrases = []
-        #         for idx, (value, p) in enumerate(zip(data[c+'_query'].tolist(), phrases)):
-        #             if value == "['']":
-        #                 indexes.append(idx)
-        #                 new_phrases.append(p)
-
-        #         values = parallel_batch_search(
-        #             phrases=phrases,
-        #             index=args.index,
-        #             batch_size=args.bs,
-        #             max_workers=num_workers  # Adjust based on your cluster capacity
-        #             )
-        #         # with ThreadPool(processes=num_workers) as pool:  # Threads don't break TLS
-        #             # values = pool.map(func, phrases)
-
-        #         for idx, v in zip(indexes, values):
-        #             # data[c+'_query'][idx] = v
-        #             data.loc[idx, c+'_query'] = str(v)
-
-        #         data = data.loc[:, ~data.columns.str.contains('^Unnamed')]
-        #         data.to_csv('retrived_docs/' + args.dataname + '_' + args.model + '_test.csv', encoding ='utf-8', index=False)
-        #         data = pd.read_csv('retrived_docs/' + args.dataname + '_' + args.model + '_test.csv', encoding='utf-8', index_col=False)
-        #         try:    
-        #             save_data = datasets.Dataset.from_pandas(data)
-        #             save_data.save_to_disk("/srv/home/groups/dm/share/verb_confidence_exp/pre-training_data_exp/" + args.dataname + '_' + args.model + '_test')
-        #         except:
-        #             pass
-                            
+   
