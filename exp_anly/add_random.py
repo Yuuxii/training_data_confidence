@@ -44,10 +44,10 @@ for dataname, formal_dataname in zip(datanames, formal_dataname_list):
 
     for model in model_to_full_name.keys():
         print(dataname, model)
-        data = datasets.load_from_disk("/srv/home/groups/dm/share/results_confidence/prob/" + model_to_full_name[model] + "/cos/"+ dataname + '_' + model + '_test/main')
-        random_data = datasets.load_from_disk("/srv/home/groups/dm/share/results_confidence/prob/" + model_to_full_name[model] + "/cos/"+ random_dataset + '_' + model + '_test/main')
+        data = datasets.load_from_disk( model_to_full_name[model] + "/cos/"+ dataname + '_' + model + '_test/main')
+        random_data = datasets.load_from_disk( model_to_full_name[model] + "/cos/"+ random_dataset + '_' + model + '_test/main')
         column = [random.choices(random_data['qa_query'])[0] for i in range(len(data['qa_query']))]
 
         data = data.add_column("random", column)
   
-        data.save_to_disk("/srv/home/groups/dm/share/verb_confidence_exp/ft_verb_check/" +  dataname + '_' + model + '_test')
+        data.save_to_disk( dataname + '_' + model + '_test')
