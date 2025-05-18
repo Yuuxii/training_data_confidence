@@ -1,0 +1,39 @@
+name: verbalizing_confidence
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - conda-forge::ipykernel
+  - datasets
+  - conda-forge::python-dotenv
+  - torchaudio
+  - torchvision
+  - scipy
+  - matplotlib
+  - conda-forge::transformers
+  - ipywidgets
+  - anaconda::scikit-learn
+  - accelerate
+  - conda-forge::wandb
+  - conda-forge::huggingface_hub
+  - seaborn
+  - tiktoken
+  - sentencepiece
+  - blobfile
+  - swifter
+  - anaconda::nltk
+  - cuda-version=12.3
+  - conda-forge::spacy-model-en_core_web_sm
+  - pip:
+      - bitsandbytes==0.45.0
+      - dill==0.3.8
+      - evaluate==0.4.3
+      - fsspec==2024.9.0
+      - hf-transfer==0.1.9
+      - multiprocess==0.70.16
+      - sympy==1.13.1
+      - torch 
+      - torchvision 
+      - torchaudio 
+      - trl
+
