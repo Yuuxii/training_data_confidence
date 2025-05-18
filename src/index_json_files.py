@@ -21,7 +21,7 @@ def es_init() -> Elasticsearch:
     :param config: Path to the config yaml file, containing `cloud_id` and `api_key` fields.
     :return: Authenticated ElasticSearch client.
     """
-    ELASTIC_PASSWORD="43tEcVyvw3*kgudJekNf"
+    ELASTIC_PASSWORD=" "
     es = Elasticsearch('https://localhost:9200', basic_auth=("elastic", ELASTIC_PASSWORD), verify_certs=False, timeout=60)
     requests.packages.urllib3.disable_warnings() 
 
@@ -126,17 +126,12 @@ def main():
         with h5py.File(args.save_ids_file, "w") as f:
             dset = f.create_dataset("ids", shape=(0,), maxshape=(None,), dtype="S40")
     print(get_indices(es=es), index)
-    # es.indices.delete(index="rlvr-7b")
-    # es.indices.delete(index="rlvr-13b")
-    # es.indices.delete(index="rlvr-8b")
+
     try:
         es.indices.delete(index=index)
     except:
         pass
-    # es.indices.delete(index="olmo13b-preference")
-    # es.indices.delete(index="llama-tulu3")
-    # es.indices.delete(index="olmo-tulu3")
-
+   
     if index not in get_indices(es=es):
         print(
             f"The index '{index}' is being created with {args.num_shards} shards"
