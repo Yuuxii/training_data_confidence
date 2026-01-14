@@ -1,3 +1,7 @@
+This repository contains the source code for the paper: 
+**_Influential Training Data Retrieval for Explaining Verbalized Confidence of LLMs (ECIR 2026)_**
+
+
 ## Training Dataset Search
 
 We employ the search mechanism developed by WIMBD, which uses Elastic Search to create a keyword-based search engine built on the training data to retrieve similar samples for the search query.
@@ -23,5 +27,4 @@ Results are stored as huggingface datasets in `--output_folder`
 
 ## Evaluation and Analysis
 
-The truthfulness evaluation is implemented in `exp_anly/analysis.py`.
-Analysis about the influence of specifical training samples is show in `exp_anly/doc_anly.py`.
+The content-groundness evaluation is implemented in `exp_anly/analysis.py`.
